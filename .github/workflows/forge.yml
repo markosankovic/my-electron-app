@@ -1,11 +1,20 @@
+name: Forge
+
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  forge:
     runs-on: ubuntu-latest
     steps:
-      - name: echo
-        shell: bash
-        run: |
-          echo "hello, world"
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Setup
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
